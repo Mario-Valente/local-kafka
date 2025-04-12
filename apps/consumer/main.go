@@ -1,4 +1,5 @@
 package main
+
 import (
 	"fmt"
 	"time"
@@ -9,7 +10,7 @@ import (
 func main() {
 
 	c, err := kafka.NewConsumer(&kafka.ConfigMap{
-		"bootstrap.servers": "localhost",
+		"bootstrap.servers": "localhost:9092",
 		"group.id":          "myGroup",
 		"auto.offset.reset": "earliest",
 	})
@@ -18,7 +19,7 @@ func main() {
 		panic(err)
 	}
 
-	err = c.SubscribeTopics([]string{"myTopic", "^aRegex.*[Tt]opic"}, nil)
+	err = c.SubscribeTopics([]string{"myTopic"}, nil)
 
 	if err != nil {
 		panic(err)
